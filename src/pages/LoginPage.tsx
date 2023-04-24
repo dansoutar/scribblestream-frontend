@@ -39,16 +39,37 @@ export const LoginPage: Component = () => {
   }
 
   return (
-    <div class='flex flex-col space-y-3 w-1/2 mx-auto'>
-      <input class='text-black' type='text' value={email()} onChange={(e) => setEmail(e.currentTarget.value)} />
-      <input class='text-black' type='text' value={password()} onChange={(e) => setPassword(e.currentTarget.value)} />
-      <button
-        onClick={() => {
-          handleLogin()
-        }}
-      >
-        Login
-      </button>
+    <div class='flex  justify-center w-full'>
+      <div class='flex flex-col space-y-3 w-1/3 mt-20'>
+        <div class='flex flex-col'>
+          <label for='email'>Email</label>
+          <input
+            class='p-1'
+            type='text'
+            name='email'
+            value={email()}
+            onChange={(e) => setEmail(e.currentTarget.value)}
+          />
+        </div>
+        <div class='flex flex-col'>
+          <label for='password'>Password</label>
+          <input
+            class='p-1'
+            type='text'
+            name='password'
+            value={password()}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+        </div>
+        <button
+          class='bg-slate-600 rounded p-1 text-white'
+          onClick={() => {
+            handleLogin()
+          }}
+        >
+          Login
+        </button>
+      </div>
     </div>
   )
 }

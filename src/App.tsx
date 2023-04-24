@@ -1,13 +1,17 @@
 import type { Component } from 'solid-js'
 import { createSignal, createEffect } from 'solid-js'
-import { A as RouteLink } from '@solidjs/router'
+import { useNavigate } from '@solidjs/router'
 
 import { AppRouter } from './Router'
 import { GlobalContext } from './GlobalContext'
+import { Header } from './components/Header'
+import { Footer } from './components/Footer'
 
 const App: Component = () => {
   const [user, setUser]: any = createSignal(null)
-  const [authenticated, setAuthenticated]: any = createSignal(false)
+  const [authenticated, setAuthenticated] = createSignal<boolean>(false)
+
+  const navigate = useNavigate()
 
   createEffect(() => {
     const localStorageUser = localStorage.getItem('user')
@@ -27,29 +31,17 @@ const App: Component = () => {
     localStorage.removeItem('user')
     setUser(null)
     setAuthenticated(false)
+    navigate('/auth/login')
   }
 
   return (
     <GlobalContext.Provider value={{ user, setUser, authenticated, setAuthenticated }}>
-      <div class='min-h-screen bg-slate-900    text-white'>
-        <header class='h-16 flex flex-col justify-center content-center'>
-          <nav class='flex flex-row space-x-5 mx-auto'>
-            <RouteLink href='/'>Home</RouteLink>
-            {authenticated() ? (
-              <button onClick={handleLogout}>Logout</button>
-            ) : (
-              <RouteLink href='/auth/login'>Login</RouteLink>
-            )}
-          </nav>
-        </header>
-
-        <main class='min-h-[calc(100vh-64px-64px)] bg-slate-950'>
+      <div class='min-h-screen'>
+        <Header {...{ handleLogout, authenticated }} />
+        <main class={`min-h-[calc(100vh-64px-64px)] bg-slate-50 flex flex-col items-center`}>
           <AppRouter />
         </main>
-
-        <footer class='h-16 flex flex-col justify-center content-center bg-slate-900'>
-          <div class='text-center'>This is a demo app.</div>
-        </footer>
+        <Footer />
       </div>
     </GlobalContext.Provider>
   )

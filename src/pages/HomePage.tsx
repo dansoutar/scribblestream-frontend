@@ -1,13 +1,14 @@
 import { Component, createSignal, createEffect } from 'solid-js'
-import { useContext } from 'solid-js'
+import { useNavigate } from '@solidjs/router'
 
-import { GlobalContext } from '../GlobalContext'
 import { httpClient } from '../http'
+import { BlogCard } from '../components/BlogCard/BlogCard'
+import type { BlogPost } from '../components/BlogCard/Types'
 
 export const HomePage: Component = () => {
-  const { authenticated }: any = useContext(GlobalContext)
+  const [blogs, setBlogs] = createSignal<BlogPost[]>()
 
-  const [blogs, setBlogs]: any = createSignal()
+  const navigate = useNavigate()
 
   createEffect(() => {
     httpClient
@@ -15,15 +16,15 @@ export const HomePage: Component = () => {
       .then((response) => setBlogs(response.data.blogs))
       .catch((error) => {
         console.log(error)
+        navigate('/auth/login')
       })
   })
 
   return (
-    <div>
-      HomePage - authenticated: {authenticated() ? 'Logged in' : 'Not logged in'}
+    <div class='w-1/2 space-y-4 p-10'>
       {blogs() &&
-        blogs().map((blog: any) => {
-          return <div>{blog.title}</div>
+        blogs()?.map((blogPost) => {
+          return <BlogCard {...{ blogPost }} />
         })}
     </div>
   )
