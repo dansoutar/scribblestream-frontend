@@ -36,9 +36,9 @@ const App: Component = () => {
 
   return (
     <GlobalContext.Provider value={{ user, setUser, authenticated, setAuthenticated }}>
-      <div class='min-h-screen'>
+      <div class='min-h-screen text-slate-900'>
         <Header {...{ handleLogout, authenticated }} />
-        <main class={`min-h-[calc(100vh-64px-64px)] bg-slate-50 flex flex-col items-center`}>
+        <main class={`min-h-[calc(100vh-80px-80px)] bg-slate-50 flex flex-col items-center p-20`}>
           <AppRouter />
         </main>
         <Footer />

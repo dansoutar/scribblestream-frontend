@@ -61,12 +61,7 @@ export const LoginPage: Component = () => {
             onChange={(e) => setPassword(e.currentTarget.value)}
           />
         </div>
-        <button
-          class='bg-slate-600 rounded p-1 text-white'
-          onClick={() => {
-            handleLogin()
-          }}
-        >
+        <button class='bg-slate-600 rounded p-1 text-white' onClick={handleLogin}>
           Login
         </button>
       </div>
