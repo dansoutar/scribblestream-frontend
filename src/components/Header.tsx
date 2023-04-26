@@ -6,7 +6,7 @@ type Props = {
   handleLogout(): void
 }
 
-const CTA_NAV_BUTTON_STYLES = 'bg-slate-400 px-3 py-1 rounded'
+const CTA_NAV_BUTTON_STYLES = 'bg-slate-600 px-3 py-1 rounded text-white'
 
 export const Header = ({ authenticated, handleLogout }: Props) => {
   return (
@@ -16,7 +16,7 @@ export const Header = ({ authenticated, handleLogout }: Props) => {
           <span class='font-bold'>🖊️ Scribblestream</span>
         </RouteLink>
         <div class='space-x-6'>
-          <RouteLink href='/new'>
+          <RouteLink href='/blog/new'>
             <span class={CTA_NAV_BUTTON_STYLES}>New blog</span>
           </RouteLink>
           {authenticated() ? (

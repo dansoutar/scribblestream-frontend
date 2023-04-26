@@ -21,7 +21,7 @@ export const HomePage: Component = () => {
   })
 
   return (
-    <div class='w-1/2 space-y-4 p-10'>
+    <div class='w-1/2 space-y-4'>
       {blogs() &&
         blogs()?.map((blogPost) => {
           return <BlogCard {...{ blogPost }} />
